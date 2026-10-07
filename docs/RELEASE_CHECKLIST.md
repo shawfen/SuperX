@@ -4,16 +4,16 @@ This checklist separates reproducible checks from manual browser and service che
 
 ## Before the first GitHub Preview
 
-- [x] Prepare and review the first local Git commit: no credentials, browser profiles, private screenshots, workstation paths, temporary SDKs or unrelated production files. Exclude the independently maintained website and internal store-preparation files. This is local preparation, not a public push.
-- [ ] Enable GitHub private vulnerability reporting and confirm the process in `SECURITY.md`.
-- [x] Review the English and Chinese README installation steps and configured release/support URLs. The stable ZIP is marked unavailable until a stable release exists; these local links do not establish public availability.
+- [x] Review and publish the first public Git commit: no credentials, browser profiles, private screenshots, workstation paths, temporary SDKs or unrelated production files. The independently maintained website and internal store-preparation files are excluded. The `v0.7.26` release contains 76 public source files.
+- [x] Enable GitHub private vulnerability reporting and confirm the process in `SECURITY.md`; the repository API reports it enabled.
+- [x] Review the English and Chinese README installation steps and configured release/support URLs. Preview download and Issues are publicly available; the stable ZIP remains unavailable until a stable release exists.
 - [x] Run local validation: 642 automated tests passed. Validate and package the exported public source separately; its installation ZIP matches the working-source build byte for byte.
 - [x] Confirm the installation ZIP has `manifest.json` at its root, includes project and Marked license notices, and matches the generated inventory and SHA-256 checksums.
-- [x] Review local release notes, privacy documentation and API billing information. This does not verify the hosted privacy page.
+- [x] Review release notes, privacy documentation and API billing information; verify the independently hosted privacy page separately.
 - [x] Complete the Chrome core acceptance recorded below for 0.7.26; disclose remaining browser and advanced manual checks in the Preview notes.
-- [ ] Publish the actual policy at `https://superx.vip/privacy/` through the existing website deployment, with the public Issues link. Confirm it shows the privacy content rather than the homepage, without signing in.
-- [ ] Publish the reviewed repository and Preview only after authorization; verify the download, Issues and privacy destinations.
-- [ ] Confirm GitHub CI and the release workflow on the published source; local runs do not establish remote CI status.
+- [x] Publish the actual policy at `https://superx.vip/privacy/` through the existing website deployment, with the public Issues link. Anonymous HTTP checks confirm the distinct bilingual privacy content and its local assets; the homepage, download and support destinations work.
+- [x] Publish the reviewed repository and Preview after authorization. Anonymous download matches the accepted installation ZIP SHA-256: `23711b6b3349428ad7374e4e409a8a96241794f1820889f7dfdbf3d0e15040b2`.
+- [x] Confirm GitHub CI and the release workflow on the published source: both completed successfully for release commit `254cade96e210e3faef4ca7e08fb67f6bc8c8e90`.
 
 The first Preview uses the completed Chrome core checks plus local validation. It does not require every Edge or advanced manual scenario below to be complete. Keep untested scenarios explicit; a Preview is not Stable or store approval.
 

@@ -16,13 +16,15 @@ SuperX 是 Chrome / Edge 扩展，通过 xAI API 自动解释当前可见的 X �
 
 | 入口 | 用途 | 当前状态 |
 | --- | --- | --- |
-| Chrome 商店 · 稳定版 | 经过验收，由 Chrome 安装与更新 | 尚未发布商店页面 |
-| [预览版 0.7.26 ZIP](https://github.com/bwjoke/SuperX/releases/download/v0.7.26/SuperX.zip) | 最新候选，解压安装 ZIP，手动更新 | 首次公开发布准备中 |
-| [所有 GitHub Releases](https://github.com/bwjoke/SuperX/releases) | 各版本安装包、源码及校验值 | 首次公开发布准备中 |
-| [最新稳定版 ZIP](https://github.com/bwjoke/SuperX/releases/latest/download/SuperX.zip) | 与最新商店稳定版相同的安装包 | 首次稳定发布后提供 |
-| [GitHub Issues](https://github.com/bwjoke/SuperX/issues) | 两个渠道共用的报错、需求与支持入口 | 仓库公开后开放 |
+| Chrome 商店 · 稳定版 | 经过验收，由 Chrome 安装与更新 | 即将上线（Coming Soon） |
+| [预览版 0.7.26 ZIP](https://github.com/bwjoke/SuperX/releases/download/v0.7.26/SuperX.zip) | 最新预览版，解压安装 ZIP，手动更新 | 已发布 |
+| [所有 GitHub Releases](https://github.com/bwjoke/SuperX/releases) | 各版本安装包、源码及校验值 | 已开放 |
+| 最新稳定版 ZIP | 与最新商店稳定版相同的安装包 | 首次稳定发布后提供 |
+| [GitHub Issues](https://github.com/bwjoke/SuperX/issues) | 两个渠道共用的报错、需求与支持入口 | 已开放 |
 
-[SuperX.vip](https://superx.vip/) 是官网；[bwjoke/SuperX](https://github.com/bwjoke/SuperX) 是代码、更新说明和支持的项目主页。预览与稳定版使用同一套源码和递增版本，商店版可以落后于更新的预览版。**GitHub 的 Latest 指最新稳定版，不包含预览版。** 最新预览版请从 Releases 列表下载，发布和晋升流程见 [双渠道说明](docs/RELEASE_CHANNELS.md)。GitHub 公开发布及 Chrome 商店页面尚在准备中，未发布的入口暂不能用于安装。
+[SuperX.vip](https://superx.vip/) 是官网；[bwjoke/SuperX](https://github.com/bwjoke/SuperX) 是代码、更新说明和支持的项目主页。预览与稳定版使用同一套源码和递增版本，商店版可以落后于更新的预览版。**GitHub 的 Latest 指最新稳定版，不包含预览版。** 最新预览版请从 Releases 列表下载，发布和晋升流程见 [双渠道说明](docs/RELEASE_CHANNELS.md)。[0.7.26 预览版](https://github.com/bwjoke/SuperX/releases/tag/v0.7.26) 已发布，Chrome 商店版即将上线。
+
+0.7.26 核心功能已由用户在 Windows 11 Chrome 中确认正常；Edge 实际安装验收仍待完成。
 
 ## 功能
 

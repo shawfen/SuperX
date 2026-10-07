@@ -16,13 +16,15 @@ The extension uses Manifest V3 and plain JavaScript. Installation needs no build
 
 | Entry | Purpose | Current status |
 | --- | --- | --- |
-| Chrome Web Store — Stable | Tested releases, installed and updated by Chrome | Listing not published yet |
-| [Preview 0.7.26 ZIP](https://github.com/bwjoke/SuperX/releases/download/v0.7.26/SuperX.zip) | Newest candidate; extract the installation ZIP and update manually | First public release in preparation |
-| [All GitHub Releases](https://github.com/bwjoke/SuperX/releases) | Versioned installation packages, source and checksums | First public release in preparation |
-| [Latest stable ZIP](https://github.com/bwjoke/SuperX/releases/latest/download/SuperX.zip) | The exact installation package of the latest stable release | Available after the first stable release |
-| [GitHub Issues](https://github.com/bwjoke/SuperX/issues) | Bugs, feature requests and shared support for both channels | Opens when the repository is public |
+| Chrome Web Store — Stable | Tested releases, installed and updated by Chrome | Coming Soon |
+| [Preview 0.7.26 ZIP](https://github.com/bwjoke/SuperX/releases/download/v0.7.26/SuperX.zip) | Newest preview; extract the installation ZIP and update manually | Published |
+| [All GitHub Releases](https://github.com/bwjoke/SuperX/releases) | Versioned installation packages, source and checksums | Available |
+| Latest stable ZIP | The exact installation package of the latest stable release | Available after the first stable release |
+| [GitHub Issues](https://github.com/bwjoke/SuperX/issues) | Bugs, feature requests and shared support for both channels | Open |
 
-[SuperX.vip](https://superx.vip/) is the website; [bwjoke/SuperX](https://github.com/bwjoke/SuperX) is the project home for source, release notes and support. Preview and Stable use the same code and version sequence; the store can lag behind newer previews. **GitHub's Latest entry means the latest stable release, not the latest preview.** Use the Releases list for the newest preview. See [release channels](docs/RELEASE_CHANNELS.md) for the release and promotion process. GitHub publication and the Chrome Web Store listing are being prepared; links to unpublished entries are not yet installation options.
+[SuperX.vip](https://superx.vip/) is the website; [bwjoke/SuperX](https://github.com/bwjoke/SuperX) is the project home for source, release notes and support. Preview and Stable use the same code and version sequence; the store can lag behind newer previews. **GitHub's Latest entry means the latest stable release, not the latest preview.** Use the Releases list for the newest preview. See [release channels](docs/RELEASE_CHANNELS.md) for the release and promotion process. [0.7.26 Preview](https://github.com/bwjoke/SuperX/releases/tag/v0.7.26) is published; the Chrome Web Store listing is coming soon.
+
+The user confirmed 0.7.26's core features on Chrome for Windows 11. Installed Edge acceptance remains pending.
 
 ## Features
 
