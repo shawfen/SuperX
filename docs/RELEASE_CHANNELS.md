@@ -43,7 +43,7 @@ GitHub's `/releases/latest` excludes previews and drafts. Until the first stable
 
 ## Prepare a preview
 
-1. Finish the intended changes on a reviewed commit and update the changelog. Run the checks in [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md), including the public-distribution prerequisites.
+1. Finish the intended changes on a reviewed commit and update the changelog. Complete the first-Preview prerequisites and core Chrome acceptance in [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). Report remaining Edge and advanced manual scenarios as untested; they do not prevent a clearly labelled Preview.
 2. Build the complete release bundle with `npm run package:release`. Check the installation ZIP, source ZIP, inventories and checksums. This local command does not publish anything.
 3. After authorization to publish, push the reviewed commit and matching `vMAJOR.MINOR.PATCH` tag. The release workflow validates the source and prepares a **draft preview**, explicitly excluded from Latest.
 4. Review the release notes and attachments. Publish the draft explicitly as a **Pre-release**, with known limitations and manual installation/update instructions. A successful workflow alone does not publish a release.
@@ -89,7 +89,9 @@ Until Discussions is enabled, the **Usage question** issue form provides a suppo
 
 ## Current preparation status
 
-On October 7, 2026, the local extension candidate is 0.7.26. It includes password-free automatic API Key encryption, independent answer/interface languages, streamed Markdown, Token/model details, comment drafts and local 24-hour browsing history that also works without an API Key. English appears immediately after Auto in both language menus. The hosted website exists; the extension repository, public releases and Chrome Web Store listing are being prepared. Final installed Chrome/Edge acceptance, the live privacy page, download/support destinations and repository security settings must be verified before publication. Automated checks and isolated previews do not substitute for those checks.
+On October 7, 2026, the local extension candidate is 0.7.26. Local preparation includes the reviewed first commit, 642 passing automated tests, reviewed privacy/release documentation and a byte-identical installation build from the exported public source. The user confirmed core functionality on Windows 11 Chrome: upgrade operation, Key restoration after restarting Windows, fresh-profile Enable/Remember Key/Auto defaults, no-Key history, first own-Key save, explanations and Fact Check, independent language switches, Auto original/translation following, and three comment drafts with copying into Notepad.
+
+These results are not complete Chrome/Edge certification. Edge installed-extension acceptance and advanced manual credential, storage, deletion and race scenarios remain pending, as recorded in [the checklist](RELEASE_CHECKLIST.md). They are disclosed limitations of the first GitHub Preview; broader acceptance and store review belong to Stable promotion. The public repository/Preview, remote CI, private vulnerability-reporting setting, live privacy page and final download/support destinations still require publication or verification. Local commits, tests and documentation do not establish those public results.
 
 ## 简体中文
 
@@ -98,6 +100,8 @@ On October 7, 2026, the local extension candidate is 0.7.26. It includes passwor
 所有安装候选都使用递增的数字版本及匹配 tag，预览身份用 GitHub 的 Pre-release 标记表示。新 tag 只生成预览草稿，审核附件后再主动公开；通过验收的同一份 ZIP 原样上传商店，商店实际发布后再将对应 GitHub Release 晋升为 Stable/Latest，保留附件和 SHA-256。GitHub `latest` 不含预览版，最新预览入口必须单独指向 Releases 列表。
 
 GitHub 解压版需要手动更新，商店版由 Chrome 更新。当前不同安装 ID 之间不自动迁移 Key 和设置，切换渠道时先停用旧版，避免重复分析。官网 [superx.vip](https://superx.vip/) 独立维护，源码不纳入扩展开源；隐私路径保持为 `/privacy/`。仓库、下载、Issues 及商店入口以实际公开状态为准，最终安装验收需单独完成。
+
+0.7.26 已由用户在 Windows 11 Chrome 中确认升级正常、重启电脑后 Key 恢复、新配置默认值、无 Key 浏览历史、首次保存 Key 后的解释与 Fact Check、两项语言独立切换、Auto 跟随原文／翻译，以及三条评论的生成与复制。首次 GitHub Preview 可以依据这些核心验收及本地校验发布，同时明确说明 Edge 实际安装及更深入的手工存储／迁移等检查仍待完成。它不代表商店稳定版或所有浏览器已验收。
 
 ## Official references
 

@@ -2,30 +2,59 @@
 
 This checklist separates reproducible checks from manual browser and service checks. A passing mock test suite is not evidence that a particular X account, browser installation, or paid API request works.
 
-## Before the first public release
+## Before the first GitHub Preview
 
-- [ ] Review the initial Git commit: no credentials, browser profiles, private screenshots, workstation paths, temporary SDKs or unrelated production files. Exclude the independently maintained website and internal store-preparation files.
+- [x] Prepare and review the first local Git commit: no credentials, browser profiles, private screenshots, workstation paths, temporary SDKs or unrelated production files. Exclude the independently maintained website and internal store-preparation files. This is local preparation, not a public push.
 - [ ] Enable GitHub private vulnerability reporting and confirm the process in `SECURITY.md`.
-- [ ] Check the English and Chinese README installation steps, `https://github.com/bwjoke/SuperX/releases` downloads and `https://github.com/bwjoke/SuperX/issues` support. Clearly mark the stable ZIP as unavailable until a stable release exists.
-- [ ] Run `npm run check`, `npm run package:check`, and `npm run package` from a fresh checkout.
-- [ ] Confirm the ZIP has `manifest.json` at its root, includes both project and Marked license notices, and matches the generated file inventory and SHA256 checksums.
-- [ ] Review the release notes, privacy notice, and API billing information.
+- [x] Review the English and Chinese README installation steps and configured release/support URLs. The stable ZIP is marked unavailable until a stable release exists; these local links do not establish public availability.
+- [x] Run local validation: 642 automated tests passed. Validate and package the exported public source separately; its installation ZIP matches the working-source build byte for byte.
+- [x] Confirm the installation ZIP has `manifest.json` at its root, includes project and Marked license notices, and matches the generated inventory and SHA-256 checksums.
+- [x] Review local release notes, privacy documentation and API billing information. This does not verify the hosted privacy page.
+- [x] Complete the Chrome core acceptance recorded below for 0.7.26; disclose remaining browser and advanced manual checks in the Preview notes.
 - [ ] Publish the actual policy at `https://superx.vip/privacy/` through the existing website deployment, with the public Issues link. Confirm it shows the privacy content rather than the homepage, without signing in.
+- [ ] Publish the reviewed repository and Preview only after authorization; verify the download, Issues and privacy destinations.
+- [ ] Confirm GitHub CI and the release workflow on the published source; local runs do not establish remote CI status.
+
+The first Preview uses the completed Chrome core checks plus local validation. It does not require every Edge or advanced manual scenario below to be complete. Keep untested scenarios explicit; a Preview is not Stable or store approval.
+
+## Before Stable / store submission
+
+- [ ] Complete the remaining installed-browser acceptance for the supported release scope, including Edge and advanced credential/storage scenarios below. Record any unsupported or deferred scope explicitly.
 - [ ] Match the Chrome Web Store privacy declarations to the actual website content, post URLs, author labels and API credential handling. No remote executable code is used.
 - [ ] Review provider and store data-handling requirements against the final simplified setup; removing the consent UI does not establish store approval or an exemption from provider terms. Provide usable review credentials only through the dashboard's private review fields.
 
-## Clean browser installation
+## 0.7.26 Chrome core acceptance — 2026-10-07
 
-Complete this table in a fresh browser profile, separately from an upgrade of an existing installation. Enter API credentials yourself in the extension settings; never include them in an issue, screenshot, recording, or test fixture.
+The user confirmed the following on installed Chrome on Windows 11. These are user-reported functional results; they do not certify every storage detail or every browser. The exact Chrome build number has not been recorded.
+
+| Scenario | Result |
+| --- | --- |
+| Upgrade the existing Chrome installation; normal operation | User-confirmed pass |
+| Restart Windows 11; remembered Key restores without re-entry | User-confirmed pass |
+| Fresh Chrome profile: Enable and Remember Key on; both language choices Auto | User-confirmed pass |
+| No API Key: local browsing history works | User-confirmed pass |
+| First save of the user's own API Key; explanation and Fact Check produce results | User-confirmed pass |
+| Answer language and interface language can be switched independently | User-confirmed pass |
+| Auto answer language follows original / translation switches | User-confirmed pass |
+| Generate three comments and copy a suggestion into Notepad | User-confirmed pass |
+
+Edge's actual installed-extension checks remain pending. Successful Key restoration does not mean the user inspected ciphertext, IndexedDB, old-format migration or failure races; those scenarios retain their separate evidence and pending manual status.
+
+## Detailed installed-browser checks
+
+Complete each scenario in a fresh browser profile, separately from an upgrade of an existing installation. A Pending entry has not been established by the core check above, even if an automated fixture covers it. Enter API credentials yourself in the extension settings; never include them in an issue, screenshot, recording, or test fixture.
 
 | Check | Chrome | Edge |
 | --- | --- | --- |
 | Record browser version and operating system | Pending | Pending |
 | Extract the release ZIP and load its root folder in Developer mode | Pending | Pending |
 | Open settings before visiting X; interface follows browser language | Pending | Pending |
-| Confirm Enable and Remember Key defaults; save and reopen settings | Pending | Pending |
-| Fresh install: no API requests without a usable Key; saving a Key allows enabled analysis without a separate consent step | Pending | Pending |
-| Remember Key saves ciphertext without a plaintext local API Key, keeps a separate IndexedDB encryption key, and restores automatically after restart without a password | Pending | Pending |
+| Fresh-profile defaults: Enable and Remember Key on; both languages Auto | User-confirmed pass | Pending |
+| Save and reopen settings; choices remain | Pending | Pending |
+| First save of an own Key allows enabled explanation and Fact Check | User-confirmed pass | Pending |
+| No API requests without a usable Key; inspect the no-Key failure path | Pending | Pending |
+| Remembered Key restores after Windows/browser restart without re-entry | User-confirmed pass (Windows reboot) | Pending |
+| Inspect saved ciphertext, absence of a plaintext local API Key and the separate IndexedDB encryption key | Pending | Pending |
 | Session-only Key is unavailable after browser restart and requires re-entry | Pending | Pending |
 | Upgrade: encrypt existing plaintext or a usable old session Key before removing old records; unavailable old password-encrypted Key requires one-time API Key re-entry | Pending | Pending |
 | Missing/damaged ciphertext or IndexedDB encryption key requests API Key re-entry, never authorizes a paid call | Pending | Pending |
@@ -34,14 +63,17 @@ Complete this table in a fresh browser profile, separately from an upgrade of an
 | Cache is reused within the browser session and removed on browser exit; legacy local cache is deleted | Pending | Pending |
 | Uncheck Remember Key; verify the choice survives browser restart and ciphertext, IndexedDB encryption key and obsolete persistent records are removed | Pending | Pending |
 | Clear Key; ciphertext, IndexedDB encryption key, old records, session Key and cache clear while the selected preference remains | Pending | Pending |
-| Use the same version for an upgrade; saved prompts/settings remain | Pending | Pending |
+| Upgrade to the candidate; normal operation | User-confirmed pass | Pending |
+| Upgrade preserves each saved prompt/setting; inspect the migration paths | Pending | Pending |
 | Check popup pause/resume and opening settings | Pending | Pending |
-| Open X; interface labels follow X and Auto follows displayed post language | Pending | Pending |
-| Switch original/translation; switch a fixed answer language | Pending | Pending |
+| Auto interface labels follow an X interface-language change | Pending | Pending |
+| Answer and interface language selections switch independently | User-confirmed pass | Pending |
+| Auto answer follows original/translation; fixed answer language can be selected | User-confirmed pass | Pending |
 | Collapse/expand; left navigation and timeline do not resize | Pending | Pending |
 | Review Markdown, source links, and model/Token tooltip | Pending | Pending |
-| Generate three one-line comment drafts and copy one; no comment is automatically posted | Pending | Pending |
-| Browsing history records visible supported posts with no Key, merges repeat views, survives restart and does not trigger paid requests when opened | Pending | Pending |
+| Generate three one-line comments and copy one into Notepad | User-confirmed pass | Pending |
+| Browsing history records visible supported posts with no Key | User-confirmed pass | Pending |
+| History merges repeat views, survives restart and makes no paid request when opened | Pending | Pending |
 | History search, individual deletion, clear and recording toggle work independently of the Key and result cache | Pending | Pending |
 | Start a request, pause or navigate away; late output does not attach to another post | Pending | Pending |
 
