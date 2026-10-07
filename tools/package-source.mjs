@@ -16,9 +16,12 @@ export const PUBLIC_SOURCE_DIRECTORIES = Object.freeze([
 ]);
 const privateTools = new Set(['tools/check-privacy-site.mjs', 'tools/render-store-assets.mjs']);
 const publicDocuments = new Set(['docs/RELEASE_CHANNELS.md', 'docs/RELEASE_CHECKLIST.md']);
-// The old .png preview had the wrong file extension. Only the current README
-// image is public; unrelated images and local screenshots stay out of exports.
-const documentationImages = new Set(['docs/assets/superx-preview.jpg']);
+// Only these two language-specific README screenshots are public and required;
+// obsolete previews and unrelated local screenshots stay out of exports.
+const documentationImages = new Set([
+  'docs/assets/superx-preview-en.png',
+  'docs/assets/superx-preview-zh-CN.png',
+]);
 const binaryExtensions = new Set(['.png', '.jpg', '.jpeg']);
 const hash = data => createHash('sha256').update(data).digest('hex');
 
@@ -64,8 +67,8 @@ export async function inspectSource(root = projectRoot, expectedVersion) {
     }
     entries.push({ name: `SuperX-${release.version}/${name}`, data });
   }
-  if (!files.includes('docs/assets/superx-preview.jpg')) {
-    throw new Error('Missing public README image: docs/assets/superx-preview.jpg');
+  for (const name of documentationImages) {
+    if (!files.includes(name)) throw new Error(`Missing public README image: ${name}`);
   }
   return { version: release.version, entries };
 }

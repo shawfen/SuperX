@@ -8,9 +8,9 @@ SuperX 是 Chrome / Edge 扩展，通过 xAI API 自动解释当前可见的 X �
 
 使用 Manifest V3 和原生 JavaScript，安装无需构建或下载依赖。目前为 Beta；X 页面结构变化、模型表现与 API 可用性会影响结果。SuperX 是独立项目，与 X 或 xAI 没有隶属关系。
 
-![SuperX 右栏预览](docs/assets/superx-preview.jpg)
+![SuperX 在 X 上展示中文解读与事实核查](docs/assets/superx-preview-zh-CN.png)
 
-*本地演示中的模拟帖子与回答，并非真实 X 页面或付费 API 会话。*
+*SuperX 在 X 上的使用截图，展示中文解读与事实核查。*
 
 ## 下载与支持
 

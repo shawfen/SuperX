@@ -8,9 +8,9 @@ SuperX is a Chrome / Edge extension that uses the xAI API to explain visible X p
 
 The extension uses Manifest V3 and plain JavaScript. Installation needs no build step or package dependencies. This is a Beta: X's changing page structure, model behavior and API availability can affect results.
 
-![SuperX right-column preview](docs/assets/superx-preview.jpg)
+![SuperX on X with English explanations and fact checks](docs/assets/superx-preview-en.png)
 
-*Local demo with simulated posts and answers; not a live X or paid API session.*
+*SuperX on X, showing English explanations and fact checks.*
 
 ## Downloads and support
 

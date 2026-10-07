@@ -12,7 +12,10 @@ const sourcePackager = import('../tools/package-source.mjs');
 const releasePackager = import('../tools/package-release.mjs');
 const installationPackager = import('../tools/package-extension.mjs');
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0, 0x10, 0x4a, 0x46, 0x49, 0x46, 0, 0x0d, 0x0a, 0xff, 0xd9]);
+const previewImages = {
+  'superx-preview-en.png': Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0xff, 0, 0x65, 0x6e]),
+  'superx-preview-zh-CN.png': Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0xff, 0, 0x7a, 0x68]),
+};
 
 async function put(root, name, content) {
   const location = join(root, name);
@@ -39,8 +42,10 @@ async function fixture(t) {
   const manifest = JSON.parse(await readFile(join(root, 'extension', 'manifest.json'), 'utf8'));
   manifest.version = '1.2.3';
   await put(root, 'extension/manifest.json', JSON.stringify(manifest));
-  await put(root, 'README.md', '![Preview](docs/assets/superx-preview.jpg)\r\n');
-  await put(root, 'docs/assets/superx-preview.jpg', jpeg);
+  await put(root, 'README.md', '![Preview](docs/assets/superx-preview-en.png)\r\n');
+  await put(root, 'README.zh-CN.md', '![预览](docs/assets/superx-preview-zh-CN.png)\r\n');
+  for (const [name, data] of Object.entries(previewImages)) await put(root, `docs/assets/${name}`, data);
+  await put(root, 'docs/assets/superx-preview.jpg', 'OLD_JPEG_DO_NOT_EXPORT');
   await put(root, 'docs/assets/superx-preview.png', 'OLD_PREVIEW_DO_NOT_EXPORT');
   await put(root, 'docs/assets/private.jpg', 'PRIVATE_IMAGE_DO_NOT_EXPORT');
   await put(root, 'docs/RELEASE_CHANNELS.md', '# Public release channels\r\n');
@@ -85,26 +90,30 @@ function entriesFromZip(bytes) {
   return entries;
 }
 
-test('public source keeps the current JPEG bytes and excludes private output and the obsolete preview', async t => {
+test('public source keeps both README PNGs unchanged and excludes private output and obsolete previews', async t => {
   const root = await fixture(t);
   const { packageSource } = await sourcePackager;
   const result = await packageSource({ root, expectedVersion: '1.2.3' });
   const archive = await readFile(join(result.outputDir, result.archiveName));
   const entries = entriesFromZip(archive);
   const names = entries.map(entry => entry.name);
-  assert.deepEqual(entries.find(entry => entry.name.endsWith('/docs/assets/superx-preview.jpg')).data, jpeg);
+  for (const [name, data] of Object.entries(previewImages)) {
+    assert.deepEqual(entries.find(entry => entry.name === `SuperX-1.2.3/docs/assets/${name}`).data, data);
+  }
   assert.ok(names.includes('SuperX-1.2.3/docs/RELEASE_CHANNELS.md'));
   assert.ok(names.includes('SuperX-1.2.3/tools/package-release.mjs'));
   assert.equal(names.some(name => /\/(?:website|chrome-web-store)\//.test(name)),false);
   assert.equal(names.some(name => /docs\/SuperX-private-review|tools\/(?:check-privacy-site|render-store-assets)\.mjs/.test(name)),false);
-  assert.equal(names.some(name => /(?:\.git\/|\.codex\/|artifacts\/|output\/|tmp\/|private\.py|superx-preview\.png|private\.jpg)/.test(name)), false);
+  assert.equal(names.some(name => /(?:\.git\/|\.codex\/|artifacts\/|output\/|tmp\/|private\.py|superx-preview\.(?:png|jpg)|private\.jpg)/.test(name)), false);
   assert.equal(archive.includes(Buffer.from('PRIVATE_WORKSPACE_DATA_DO_NOT_EXPORT')), false);
   assert.equal(archive.includes(Buffer.from('OLD_PREVIEW_DO_NOT_EXPORT')), false);
+  assert.equal(archive.includes(Buffer.from('OLD_JPEG_DO_NOT_EXPORT')), false);
   assert.equal(archive.includes(Buffer.from('PRIVATE_IMAGE_DO_NOT_EXPORT')), false);
   for (const marker of ['PRIVATE_WEBSITE_DO_NOT_EXPORT','PRIVATE_STORE_DO_NOT_EXPORT','PRIVATE_REVIEW_DO_NOT_EXPORT','PRIVATE_WEBSITE_TOOL_DO_NOT_EXPORT','PRIVATE_STORE_TOOL_DO_NOT_EXPORT']) {
     assert.equal(archive.includes(Buffer.from(marker)),false);
   }
-  assert.equal(entries.find(entry => entry.name.endsWith('/README.md')).data.toString(), '![Preview](docs/assets/superx-preview.jpg)\n');
+  assert.equal(entries.find(entry => entry.name.endsWith('/README.md')).data.toString(), '![Preview](docs/assets/superx-preview-en.png)\n');
+  assert.equal(entries.find(entry => entry.name.endsWith('/README.zh-CN.md')).data.toString(), '![预览](docs/assets/superx-preview-zh-CN.png)\n');
   const inventoryBytes = await readFile(join(result.outputDir, result.filesName));
   assert.deepEqual(JSON.parse(inventoryBytes).files,
     entries.map(entry => ({ path: entry.name, bytes: entry.data.length, sha256: hash(entry.data) })));
@@ -117,7 +126,8 @@ test('public source bytes stay identical when only text line endings change', as
   const { packageSource } = await sourcePackager;
   const first = await packageSource({ root });
   const bytes = await readFile(join(first.outputDir, first.archiveName));
-  await put(root, 'README.md', '![Preview](docs/assets/superx-preview.jpg)\n');
+  await put(root, 'README.md', '![Preview](docs/assets/superx-preview-en.png)\n');
+  await put(root, 'README.zh-CN.md', '![预览](docs/assets/superx-preview-zh-CN.png)\n');
   const second = await packageSource({ root });
   assert.deepEqual(await readFile(join(second.outputDir, second.archiveName)), bytes);
 });
@@ -126,9 +136,14 @@ test('public source refuses missing README images, embedded credentials and mism
   const root = await fixture(t);
   const { packageSource } = await sourcePackager;
   await assert.rejects(packageSource({ root, expectedVersion: '1.2.4' }), /Release version mismatch/);
-  await rm(join(root, 'docs/assets/superx-preview.jpg'));
-  await assert.rejects(packageSource({ root }), /Missing public README image/);
-  await put(root, 'docs/assets/superx-preview.jpg', jpeg);
+  for (const [name, data] of Object.entries(previewImages)) {
+    await rm(join(root, 'docs/assets', name));
+    await assert.rejects(packageSource({ root }), error => {
+      assert.equal(error.message, `Missing public README image: docs/assets/${name}`);
+      return true;
+    });
+    await put(root, `docs/assets/${name}`, data);
+  }
   const fakeCredential = `xai-${'A'.repeat(40)}`;
   await put(root, 'README.md', fakeCredential);
   await assert.rejects(packageSource({ root }), error => {
@@ -184,8 +199,8 @@ test('release packaging fails its source preflight without leaving installation 
   const outputDir = join(root, 'artifacts', 'candidate');
   await put(root, 'README.md', `xai-${'A'.repeat(40)}`);
   await assert.rejects(packageRelease({ root, outputDir }), /Potential credential/);
-  await put(root, 'README.md', '![Preview](docs/assets/superx-preview.jpg)\n');
-  await rm(join(root, 'docs/assets/superx-preview.jpg'));
+  await put(root, 'README.md', '![Preview](docs/assets/superx-preview-en.png)\n');
+  await rm(join(root, 'docs/assets/superx-preview-zh-CN.png'));
   await assert.rejects(packageRelease({ root, outputDir }), /Missing public README image/);
   for (const name of ['SuperX-1.2.3.zip', 'SuperX.zip', 'SuperX-1.2.3-source.zip']) {
     await assert.rejects(readFile(join(outputDir, name)), { code: 'ENOENT' });
