@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "SuperX",
+  "version": "0.7.26",
+  "homepage_url": "https://superx.vip/",
+  "description": "浏览 X 时，通过 xAI API 自动在帖子右侧展示 Grok 的解释与事实求证。",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": ["https://x.com/*", "https://twitter.com/*", "https://api.x.ai/*"],
+  "background": {"service_worker": "background.js"},
+  "icons": {"16": "assets/icon-16.png", "32": "assets/icon-32.png", "48": "assets/icon-48.png", "128": "assets/icon-128.png"},
+  "action": {"default_title": "SuperX", "default_popup": "popup.html", "default_icon": {"16": "assets/icon-16.png", "32": "assets/icon-32.png"}},
+  "options_page": "options.html",
+  "web_accessible_resources": [{"resources": ["assets/superx-symbol.svg"], "matches": ["https://x.com/*", "https://twitter.com/*"]}],
+  "content_scripts": [{
+    "matches": ["https://x.com/*", "https://twitter.com/*"],
+    "js": ["feed-core.js", "ui-i18n.js", "overlay-layout.js", "marked.umd.js", "markdown-renderer.js", "content.js"],
+    "run_at": "document_idle"
+  }]
+}

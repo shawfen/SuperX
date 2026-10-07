@@ -1,0 +1,34 @@
+node_modules/
+dist/
+coverage/
+artifacts/
+output/
+tmp/
+*.log
+.DS_Store
+
+# Local credentials and workstation configuration.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.codex/
+.agents/
+.aws/
+.vscode/
+
+# Private website, store submission material and local review records.
+/website/
+/chrome-web-store/
+/docs/SuperX-*.md
+/docs/GrokFirst-before-0.7.0.md
+/tools/check-privacy-site.mjs
+/tools/render-store-assets.mjs
+
+# Local-only production utilities.
+/tools/*.py
+/tools/render_superx_*.cjs
+/新建 文本文档.txt

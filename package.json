@@ -1,0 +1,21 @@
+{
+  "name": "superx",
+  "version": "0.7.26",
+  "private": true,
+  "license": "MIT",
+  "description": "A Chrome/Edge extension for automatic Grok explanations and fact-checking beside X posts.",
+  "homepage": "https://superx.vip/",
+  "repository": { "type": "git", "url": "https://github.com/bwjoke/SuperX.git" },
+  "bugs": { "url": "https://github.com/bwjoke/SuperX/issues" },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node tools/validate.mjs",
+    "package": "node tools/package-extension.mjs",
+    "package:release": "node tools/package-release.mjs",
+    "package:check": "node tools/package-extension.mjs --check",
+    "package:source": "node tools/package-source.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

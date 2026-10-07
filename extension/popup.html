@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SuperX</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="feed-core.js" defer></script>
+    <script src="ui-i18n.js" defer></script>
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header><h1 class="brand-heading"><span class="brand-logo" role="img" aria-label="SuperX"></span></h1><p data-i18n="options.tagline">Understand X. Fact-check as you scroll.</p></header>
+      <div class="state-card">
+        <div class="state-heading"><span id="indicator" class="indicator" aria-hidden="true"></span><strong id="enabled-label">Loading…</strong></div>
+        <dl><div><dt data-i18n="options.source">Answer source</dt><dd id="provider-label">—</dd></div></dl>
+      </div>
+      <button id="toggle" class="primary-button" type="button" disabled>Loading…</button>
+      <button id="options" class="secondary-button" type="button" data-i18n="common.openSettings">Open settings</button>
+      <button id="history" class="secondary-button" type="button" data-i18n="common.history">Browsing history</button>
+      <p id="status" role="status" aria-live="polite"></p>
+      <p id="provider-hint" class="hint"></p>
+    </main>
+  </body>
+</html>

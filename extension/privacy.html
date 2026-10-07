@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SuperX 隐私政策 / Privacy policy: data sent to xAI, local API key storage, and deletion controls.">
+  <meta name="theme-color" content="#0f1419">
+  <title>SuperX — 隐私政策 / Privacy Policy</title>
+  <style>
+    :root { color-scheme: light; --ink: #0f1419; --muted: #536471; --line: #cfd9de; --blue: #086dc7; --soft: #f5f9fc; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #fff; color: var(--ink); font: 16px/1.75 system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+    a { color: var(--blue); text-underline-offset: .2em; overflow-wrap: anywhere; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; border-radius: 2px; }
+    header { border-bottom: 1px solid var(--line); }
+    .header-inner { max-width: 940px; margin: auto; padding: 24px 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { font-size: 26px; font-weight: 800; letter-spacing: -.045em; }
+    .brand span { color: var(--blue); }
+    nav { display: flex; flex-wrap: wrap; gap: 20px; font-size: 14px; }
+    main { max-width: 940px; margin: auto; padding: 38px 28px 56px; }
+    .eyebrow { margin: 0 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-size: 12px; font-weight: 700; }
+    h1 { margin: 0; font-size: clamp(29px, 5vw, 45px); line-height: 1.2; letter-spacing: -.03em; }
+    .intro { color: var(--muted); margin: 16px 0 26px; }
+    article { scroll-margin-top: 24px; }
+    article + article { margin-top: 56px; padding-top: 32px; border-top: 2px solid var(--ink); }
+    h2 { margin: 0 0 6px; font-size: 27px; line-height: 1.4; }
+    h3 { margin: 30px 0 10px; font-size: 19px; line-height: 1.4; }
+    p { margin: 10px 0 16px; }
+    .date { color: var(--muted); font-size: 14px; }
+    ul { padding-left: 24px; }
+    li { margin: 8px 0; }
+    .notice { padding: 18px 20px; border-left: 4px solid var(--blue); background: var(--soft); margin: 22px 0; }
+    .notice p:last-child { margin-bottom: 0; }
+    code { font: .9em/1.5 ui-monospace, "Cascadia Code", Consolas, monospace; padding: 1px 4px; border-radius: 4px; background: #eff3f4; overflow-wrap: anywhere; }
+    dl { margin: 16px 0; }
+    .storage { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .storage > div { display: grid; grid-template-columns: minmax(150px, .8fr) minmax(0, 2fr); gap: 20px; padding: 16px 20px; }
+    .storage > div + div { border-top: 1px solid var(--line); }
+    dt { font-weight: 650; }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    footer p { max-width: 940px; margin: auto; padding: 22px 28px; }
+    @media (max-width: 560px) {
+      .header-inner { padding: 18px 20px; }
+      main { padding: 28px 20px 42px; }
+      .storage > div { display: block; padding: 14px 16px; }
+      dt { margin-bottom: 6px; }
+      .notice { padding: 15px 16px; }
+      h3 { margin-top: 27px; }
+      footer p { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">Super<span>X</span></div>
+      <nav aria-label="语言 / Languages">
+        <a href="#zh" lang="zh-CN">中文</a>
+        <a href="#en" lang="en">English</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <p class="eyebrow">Data &amp; privacy</p>
+    <h1>隐私政策<br><span lang="en">Privacy Policy</span></h1>
+    <p class="intro">了解 SuperX 发送哪些数据、如何保存 Key，以及怎样暂停或清除本机数据。<br><span lang="en">What SuperX sends, how it stores your key, and how to pause or clear local data.</span></p>
+
+    <aside class="notice" role="note"><strong>SuperX 本机隐私说明 / Included privacy notice</strong><p>此页面随扩展提供。<a href="https://superx.vip/privacy/" rel="noopener noreferrer">在线隐私政策 / Online privacy policy</a> · <a href="https://github.com/bwjoke/SuperX/issues" rel="noopener noreferrer">GitHub 支持 / Support</a></p></aside>
+
+    <article id="zh" lang="zh-CN" aria-labelledby="zh-title">
+      <h2 id="zh-title">SuperX 隐私政策</h2>
+      <p class="date">最后更新：2026 年 10 月 7 日</p>
+      <p>本政策说明 SuperX 浏览器扩展在 xAI API 模式下的数据处理。SuperX 使用你自己的 xAI API Key，为 X／Twitter 帖子提供解释、事实主张分析和评论草稿。SuperX 是独立开发的扩展，与 X、Grok 或 xAI 没有官方隶属或背书关系。</p>
+
+      <h3>1. 配置与分析范围</h3>
+      <p>在设置中填写自己的普通 xAI API Key、保存并启用 SuperX 后，可见且符合条件的帖子会进入分析队列。没有单独的数据同意勾选或 ZDR 声明步骤。暂停自动分析可停止新的自动请求；清除或更换 Key 会取消排队和正在进行的工作，并清除原会话 Key 与缓存。已经发送给 xAI 的数据无法通过这些操作收回。</p>
+      <div class="notice">
+        <strong>分析不限于公开帖子。</strong>
+        <p>受保护帖子、回复，以及喜欢或书签页面中的帖子，只要以支持的帖子元素出现在启用的页面中，也可能被发送给 xAI。即使 xAI 无法凭链接访问某条帖子，页面可见的正文仍可能作为上下文发送。打开不希望上传的内容前，请先暂停 SuperX 或移除 Key。</p>
+      </div>
+      <p>私信和独立 Grok 页面不参与分析或历史记录。SuperX 不读取 X 登录 Cookie，不访问浏览器其他网站的历史，也不向 xAI 发送 X 会话凭据。独立的本机浏览历史会记录 SuperX 和历史记录启用时实际可见的支持帖子，详情见下文。它不会自动发帖、评论、点赞或转发。评论建议始终是草稿；点击复制后，由你自行编辑和发布。</p>
+
+      <h3>2. 发送给 xAI 的信息</h3>
+      <p>请求通过 HTTPS 从扩展后台直接发送至 <code>api.x.ai</code>。根据所用功能，请求可能包含：</p>
+      <ul>
+        <li>原始帖子的规范链接和帖子 ID。</li>
+        <li>当前页面显示的正文、语言标记、作者标签和发布时间。</li>
+        <li>媒体是否存在、最多四个符合条件的 X 图片 URL 及其可访问描述、可用的引用帖子上下文。图片 URL 或缩略图不代表模型一定实际查看了媒体。</li>
+        <li>所选模型、回答语言、搜索设置、生成流程、实际生效的任务指令，以及你选用的自定义提示词。</li>
+        <li>后台求证所需的先前解释，或生成评论草稿所需的已有分析。</li>
+      </ul>
+      <p>API Key 作为请求的认证凭据发送给 xAI。使用搜索功能时，请求会让 xAI 的工具检索原帖和相关证据，工具可能取得其他帖子、网页或媒体。SuperX 不会独立预加载每条完整帖子或视频。</p>
+
+      <h3>3. 第三方处理与数据用途</h3>
+      <p>SuperX 开发者不运营 API 中转、分析或遥测服务。分析和评论请求直接发送给 xAI；xAI 对请求、日志和工具数据的处理受其自身条款、政策与账号配置约束。</p>
+      <p>请求设置 <code>store: false</code>，但这不能保证 xAI 不保留请求、日志或工具输入。<a href="https://docs.x.ai/developers/faq/security" rel="noopener noreferrer">xAI API 数据与安全说明</a>介绍默认保留和可选的团队级 ZDR；<a href="https://x.ai/legal/data-processing-addendum" rel="noopener noreferrer">数据处理附录</a>另行规定个人数据应使用启用 ZDR 的 API。公开帖子也可能含个人数据。扩展不检查或配置这些服务商条件，普通 Key 或 <code>store: false</code> 本身不代表符合其要求；另见 <a href="https://x.ai/legal/terms-of-service-enterprise" rel="noopener noreferrer">xAI 企业服务条款</a>。</p>
+      <p>SuperX 对用户数据的使用和传输遵守 <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" rel="noopener noreferrer">Chrome 网上应用店用户数据政策及有限使用要求</a>。帖子内容及相关浏览活动仅用于公开说明的解释、求证、评论草稿和本机近期历史功能及必要缓存，不用于广告定向、数据交易、信用判断或无关画像。</p>
+      <p>模型返回的 Markdown 在本机解析。扩展不执行模型 HTML，也不加载模型提供的图片。安全的 HTTP(S) 来源链接仅在你点击时打开；访问来源网站、API 控制台或帮助链接是单独的网站交互，适用其各自政策。X 自身仍独立进行正常的页面请求。</p>
+
+      <h3>4. 本机保存的数据</h3>
+      <dl class="storage">
+        <div><dt>记住 API Key</dt><dd>默认勾选记住 Key，以 AES-GCM 自动加密保存。密文位于本机扩展存储 <code>apiKeyEncrypted</code>，随机生成的不可导出加密密钥单独保存在扩展 IndexedDB 中。重启浏览器后自动恢复到受限会话存储，无需密码或手动解锁。</dd></div>
+        <div><dt>会话 Key</dt><dd>未选择“记住 Key”时，Key 仅保存在浏览器会话扩展存储和必要运行内存中，扩展不会刻意跨会话持久保存；重启浏览器后需重新填写。Key 仅供可信扩展界面与后台使用；内容脚本仅获知 Key 是否可用。</dd></div>
+        <div><dt>设置</dt><dd>设置、自定义提示词、Key 保存偏好和最近报告的 X 界面语言保存在本机，直到你更改或移除扩展数据。</dd></div>
+        <div><dt>分析和评论缓存</dt><dd>仅保存在浏览器会话扩展存储中，在当前会话内最多重用 24 小时，最多 160 项、约 4 MB。包含生成文本、评论、来源、模型与用量信息、完成时间以及缓存身份；身份可能包含帖子 URL、设置、提示词、帖子／引用快照和已有分析。浏览器会话结束时清除，不跨新的浏览器会话。</dd></div>
+        <div><dt>近期浏览历史</dt><dd>默认记录 SuperX 启用时实际可见的支持帖子，无需停留、API Key 或分析完成。规范帖链接／ID、当前正文（最多 12,000 字符）、作者、语言、媒体存在标记、首次／最近浏览时间与次数保存在未加密、受限的本机扩展存储 <code>superxHistory</code>。已有回答（最多 30,000 字符）、最多 20 个安全出处、模型／Token 信息及三条评论草稿可一并保留。重启后仍可查看，按最后浏览保留 24 小时，最多 1,000 条、约 6 MB；超出容量可能提前删除旧条目。可能包含非公开帖子，不保存图片文件或完整帖存档。</dd></div>
+        <div><dt>临时状态</dt><dd>每个标签页的计数、折叠状态和会话界面语言保存在会话存储。页面快照、部分回答和排队任务保存在相关页面／后台运行期间的内存中。</dd></div>
+      </dl>
+      <p>会话缓存可能重复原帖内容，并非匿名索引。设置、自定义提示词和浏览历史不加密，扩展不使用浏览器同步保存设置、Key 或历史。自动加密可保护单独泄露的密文或本机设置存储，不能保护密文与 IndexedDB 同时泄露、整个浏览器配置、包含这些记录的备份或已被控制的运行环境／设备。「不可导出」仅限制 Web Crypto 导出原始加密密钥，不代表绑定操作系统凭据或硬件。请将 Key、提示词、缓存、历史及已显示内容视为可能敏感的数据。</p>
+      <p>升级时可复用已有明文 Key 或旧版可用的会话 Key；选择记住 Key 时先完成加密保存，再删除明文记录。选择仅会话保存时，删除持久 Key 记录及本机加密密钥。密文或加密密钥缺失、损坏时，请重新填写一次 API Key。新版不解密旧版密码加密记录，旧记录仅保留到成功迁移、更换或清除 Key。旧的数据同意字段不再使用，也不再控制分析。</p>
+      <p>升级后后台初始化时会删除旧版保存在本机持久存储中的结果缓存，不将其私密内容迁移到新的会话缓存。新结果只在当前浏览器会话中缓存；浏览历史是另一个持久保存功能。</p>
+      <p>历史仅在本机保存，不作为历史集合上传，也不使用同步。重复帖子合并，按最后浏览排序；再次实际浏览会刷新该帖的 24 小时期限。搜索、展开或查看已有回答不会调用 API、恢复生成或自动请求远程图片；点击原帖或出处才访问相应网站。它不为补齐历史而检索未显示内容。</p>
+
+      <h3>5. 到期、删除与控制</h3>
+      <ul>
+        <li><strong>暂停／停用：</strong>停止自动分析和新的历史记录，不会删除 Key、缓存或已有历史。已经到达 xAI 的请求仍可能完成或计费。</li>
+        <li><strong>折叠：</strong>取消等待中的工作并恢复 X 侧栏；已经开始的请求可能完成。折叠不等于暂停所有请求或清除凭据。</li>
+        <li><strong>更换 Key：</strong>取消旧请求并清除原会话缓存，保留浏览历史，再应用新的 Key；已经到达 xAI 的请求仍可能计费。</li>
+        <li><strong>清除 Key：</strong>取消任务并移除密文、IndexedDB 加密密钥、旧版 Key 记录、会话凭据和会话缓存；不删除浏览历史，不在 xAI 撤销 Key，也不删除已经发送的请求。需要撤销 Key 时，请在 xAI 控制台操作。</li>
+        <li><strong>清除缓存：</strong>移除会话结果缓存，不清除 Key、设置、浏览历史、xAI 记录或已显示在打开页面上的回答。刷新页面可清除已显示结果；之后完成的新请求可能再次写入缓存。</li>
+        <li><strong>历史控制：</strong>关闭「保存浏览历史」停止新增记录及回答更新，已有记录保留至到期。可删除单条或清空全部历史，不清除 Key、答案缓存、服务商记录或 X 中已显示的回答。记录仍开启时，之后实际浏览帖子可以创建新记录。</li>
+        <li><strong>改为会话保存：</strong>取消“记住 Key”并保存后，删除密文、IndexedDB 加密密钥及旧版持久 Key 记录，当前 API Key 仅保留于会话。会话 Key 不会未经选择记住 Key 自动持久保存。</li>
+      </ul>
+      <p>清除扩展记录不保证从设备、旧备份或浏览器存储残留中完成取证级擦除。</p>
+      <p><strong>24 小时是会话缓存的重用到期时间，不是定时删除保证。</strong>后台初始化和保存新缓存时会修剪过期、格式错误、未来时间或超出预算的条目。过期条目可能留在仍运行的浏览器会话中，直到下次修剪或主动清除。浏览器会话结束时缓存会清除，不跨新的浏览器会话；仅关闭 X 标签页并不等于结束浏览器会话。通过浏览器卸载扩展或移除扩展数据是更全面的本机删除操作；第三方记录须另行处理。</p>
+      <p>浏览历史的 24 小时独立期限从最后浏览开始。到期条目不再显示，并在后台启动、历史读写及每小时 <code>alarms</code> 清理中删除。浏览器未运行、调度延迟或存储错误可能延迟实际删除，不保证精确时点擦除。浏览历史跨重启保留，容量上限可能使旧记录提前移除。</p>
+      <p>SuperX 没有独立的费用预算或帖子数量上限。启用自动分析后，所有可见且符合条件的帖子都可能产生付费请求；请先了解 xAI 计费。</p>
+
+      <h3>6. 权限</h3>
+      <ul>
+        <li><code>storage</code>：保存本机设置、近期浏览历史和可选加密保存的 API Key，以及受限会话 Key 和会话缓存。</li>
+        <li><code>alarms</code>：定期清除已到期的本机历史记录，不定时发起付费请求。</li>
+        <li><code>https://x.com/*</code>、<code>https://twitter.com/*</code>：读取支持的帖子元素，跟随主题／语言并显示结果列。</li>
+        <li><code>https://api.x.ai/*</code>：由扩展后台直接调用 xAI。</li>
+      </ul>
+      <p>扩展不申请浏览器的 <code>cookies</code>、<code>history</code> 或访问所有网站的权限。本机近期历史来自支持页面上的可见 X 帖子，不读取浏览器全局历史数据库。内容脚本匹配的网站范围比实际支持的分析路径更宽；运行时会排除私信以及独立 Grok／设置流程。</p>
+
+      <h3>7. 支持、网站与政策更新</h3>
+      <p>公开支持入口：<a href="https://github.com/bwjoke/SuperX/issues" rel="noopener noreferrer">SuperX Issues</a>。提交截图、日志或问题前，请删除 Key、密码、账号资料、受保护帖子和请求载荷。公开 GitHub 问题可能被任何人查看，GitHub 的条款和隐私政策也适用。主动提交的内容用于处理你提出的问题。敏感安全问题请使用已启用的 <a href="https://github.com/bwjoke/SuperX/security/advisories/new" rel="noopener noreferrer">私密漏洞报告</a>；如果该入口不可用，仅公开询问私密联系渠道，不要提交敏感细节。</p>
+      <p>本隐私页面不含远程脚本或追踪代码。静态网站托管商仍可能依其设置保留访问日志，例如 IP、访问时间和请求路径；网站访问与扩展发往 xAI 的分析请求不同。</p>
+      <p>当处理字段、Key 存储、主机权限或第三方请求改变时，会相应更新本政策和扩展内说明。你可通过上方支持入口提出问题。本政策不承诺代替 xAI 删除其已收到的数据，也不保证 AI 输出正确。</p>
+    </article>
+
+    <article id="en" lang="en" aria-labelledby="en-title">
+      <h2 id="en-title">SuperX Privacy Policy</h2>
+      <p class="date">Last updated: October 7, 2026</p>
+      <p>This policy describes data handling by the SuperX browser extension in xAI API mode. SuperX uses your own xAI API key to explain X/Twitter posts, analyze factual claims, and draft replies. It is independently developed and is not officially affiliated with or endorsed by X, Grok, or xAI.</p>
+
+      <h3>1. Setup and analysis scope</h3>
+      <p>Add your own normal xAI API key in settings, save it, and enable SuperX; visible eligible posts can then enter the analysis queue. There is no separate data-consent checkbox or ZDR-attestation step. Pause automatic analysis to stop new automatic requests. Clearing or replacing the key cancels queued and active work and clears the previous session key and cache. These controls cannot recall data already sent to xAI.</p>
+      <div class="notice">
+        <strong>Analysis is not limited to public posts.</strong>
+        <p>Protected posts, replies, and posts visible in likes or bookmarks can be sent to xAI when they appear as supported post elements on an enabled page. Even when xAI cannot retrieve a post by URL, its visible text can still be sent as context. Pause SuperX or remove the key before viewing content you do not want transmitted.</p>
+      </div>
+      <p>Direct messages and standalone Grok pages are excluded from analysis and history recording. SuperX does not read X authentication cookies, access the browser's history of other sites, or send X session credentials to xAI. Its separate local history records supported posts actually visible while SuperX and history recording are enabled, as described below. It does not automatically post, reply, like, or repost. Reply suggestions remain drafts; you choose whether to copy, edit, and post them.</p>
+
+      <h3>2. Information sent to xAI</h3>
+      <p>Requests go directly over HTTPS from the extension background worker to <code>api.x.ai</code>. Depending on the feature used, a request can include:</p>
+      <ul>
+        <li>The original post's canonical URL and post ID.</li>
+        <li>The currently displayed text, language mark, author label, and timestamp.</li>
+        <li>Media presence, up to four eligible X-hosted image URLs and accessible descriptions, and available quoted-post context. A URL or thumbnail does not guarantee that a model inspected the media.</li>
+        <li>The selected model, answer language, search settings, generation flow, effective task instructions, and any selected custom prompts.</li>
+        <li>The earlier explanation for a background fact check, or existing analysis for a reply-drafting request.</li>
+      </ul>
+      <p>The API key is sent to xAI as the request's authentication credential. Search-enabled requests ask xAI tools to retrieve the original post and relevant evidence; those tools may retrieve further posts, pages, or media. SuperX does not independently preload every complete post or video.</p>
+
+      <h3>3. Third parties and purposes</h3>
+      <p>The SuperX developer operates no API relay, analytics service, or telemetry endpoint. Analysis and reply requests go directly to xAI. Its handling of requests, logs, and tool data is governed by its own terms, policies, and account configuration.</p>
+      <p>Requests set <code>store: false</code>, which does not guarantee that xAI retains no requests, logs, or tool inputs. Its <a href="https://docs.x.ai/developers/faq/security" rel="noopener noreferrer">API security documentation</a> describes default retention and optional team-wide ZDR; its <a href="https://x.ai/legal/data-processing-addendum" rel="noopener noreferrer">Data Processing Addendum</a> separately requires ZDR-enabled processing for Personal Data. Public posts can contain Personal Data. SuperX does not check or configure these provider requirements, and a normal key or <code>store: false</code> does not establish compliance. See also the <a href="https://x.ai/legal/terms-of-service-enterprise" rel="noopener noreferrer">xAI enterprise terms</a>.</p>
+      <p>SuperX's use and transfer of user data adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" rel="noopener noreferrer">Chrome Web Store User Data Policy, including the Limited Use requirements</a>. Post content and related browsing activity are used only for the described explanation, claim-analysis, reply-drafting and on-device recent-history features and necessary caches, not for advertising targeting, data sales, credit decisions, or unrelated profiling.</p>
+      <p>Model Markdown is parsed locally. SuperX does not execute model HTML or load model-provided images. Safe HTTP(S) source links open only when clicked. Visiting a source, API console, or help link is a separate interaction subject to that site's policies. X continues its normal page requests independently.</p>
+
+      <h3>4. Data stored on your device</h3>
+      <dl class="storage">
+        <div><dt>Remembered API key</dt><dd>Remember Key is selected by default and encrypts the API key automatically with AES-GCM. Ciphertext is stored in local extension storage as <code>apiKeyEncrypted</code>; a separate, randomly generated, non-extractable CryptoKey is stored in extension IndexedDB. The worker automatically restores the API key into restricted session storage after browser restart, with no password or manual unlock step.</dd></div>
+        <div><dt>Session key</dt><dd>With Remember Key disabled, the key is kept in browser session extension storage and necessary runtime memory, not deliberately persisted across sessions. Enter it again after browser restart. The key is available only to trusted extension UI/background contexts; content scripts receive only whether a key is available.</dd></div>
+        <div><dt>Settings</dt><dd>Settings, custom prompts, key-storage preferences, and the last reported X interface language remain in local storage until changed or extension data is removed.</dd></div>
+        <div><dt>Analysis and reply cache</dt><dd>Kept only in browser session extension storage, reusable for up to 24 hours within the current session, and bounded to 160 entries and approximately 4 MB. Entries contain generated text/replies, sources, model and usage metadata, completion times, and cache identities. Identities can include post URLs, settings, prompts, post/quotation snapshots, and earlier analysis. The cache is cleared when the browser session ends and does not carry into a new browser session.</dd></div>
+        <div><dt>Recent browsing history</dt><dd>Recording defaults on for supported posts actually visible while SuperX is enabled, without a dwell delay, API key or completed analysis. Canonical post URLs/IDs, displayed text (up to 12,000 characters), author, language, media-presence flag, first/latest viewing times and counts are kept in unencrypted, restricted local extension storage as <code>superxHistory</code>. Existing answers (up to 30,000 characters), up to 20 safe sources, model/Token metadata and three comment drafts can be retained. It survives browser restart, lasts 24 hours after the latest view, and is bounded to 1,000 posts and approximately 6 MB; older records may be removed earlier to meet limits. It can contain non-public posts and does not save image files or a complete post archive.</dd></div>
+        <div><dt>Temporary state</dt><dd>Per-tab counters, collapse state, and session interface language are stored in session storage. Page snapshots, partial answers, and queued jobs remain in memory while their page/worker is active.</dd></div>
+      </dl>
+      <p>Cached output can repeat the original post's contents; the session cache is not an anonymous index. Settings, custom prompts and browsing history are not encrypted, and settings, keys and history are not stored through browser sync. Automatic encryption protects exposure of ciphertext or local-settings storage alone. It does not protect access to the ciphertext and IndexedDB together, a full browser profile, backups containing those records, or a compromised runtime/device. Non-extractable prevents raw CryptoKey export through Web Crypto; it does not bind the key to operating-system credentials or hardware. Treat keys, prompts, cached output, history and displayed content as potentially sensitive.</p>
+      <p>An upgrade can reuse existing plaintext credentials or an available session key from an older version. When Remember Key is selected, the API key is encrypted before its plaintext record is removed. Session-only storage removes persistent key records and the local encryption key. Missing or damaged ciphertext or encryption keys require one-time API key re-entry. Older password-encrypted records are not decrypted and remain only until successful migration, replacement or clearing. Obsolete data-consent fields are ignored and no longer control analysis.</p>
+      <p>On worker initialization after upgrade, legacy result caches in persistent local storage are deleted. Their private contents are not migrated into the new session cache. New results are cached only for the current browser session; browsing history is a separate persistent feature.</p>
+      <p>History stays on this device, is not uploaded as a history collection and is not synced. Repeated posts are merged and ordered by the latest view; viewing a post again restarts its 24-hour period. Searching, expanding or viewing saved answers makes no API request, does not resume generation and does not fetch remote images. Original-post or source links visit their websites only when clicked. History does not retrieve unseen content to complete a saved post.</p>
+
+      <h3>5. Expiry, deletion, and controls</h3>
+      <ul>
+        <li><strong>Pause/disable:</strong> Stops automatic analysis and new history recording without deleting keys, caches or existing history. Requests that already reached xAI may finish or incur charges.</li>
+        <li><strong>Collapse:</strong> Cancels waiting work and restores X's sidebar. Started requests may finish. Collapse does not pause every request or clear credentials.</li>
+        <li><strong>Replace key:</strong> Cancels old requests and clears the previous session cache before applying the replacement key. Existing browsing history remains. Work already sent to xAI may still incur charges.</li>
+        <li><strong>Clear key:</strong> Cancels tasks and removes ciphertext, the IndexedDB encryption key, obsolete key records, the session credential and session cache. It does not delete browsing history, revoke the key at xAI or delete requests already sent. Revoke a key in the xAI console when needed.</li>
+        <li><strong>Clear cache:</strong> Removes the session result cache, not the key, settings, browsing history, xAI records, or answers already displayed on an open page. Refresh the page to clear displayed results. New completed requests may create new cache entries.</li>
+        <li><strong>History controls:</strong> Turn off Save browsing history to stop new records and answer updates while retaining existing records until expiry. Delete one post or clear all history without deleting the key, result cache, provider records or answers displayed in X. A later actual view may create a new record while recording remains enabled.</li>
+        <li><strong>Switch to session-only:</strong> Uncheck Remember Key and save to remove ciphertext, the IndexedDB encryption key and obsolete persistent key records, keeping the current API key in session storage. Session-only keys are not automatically persisted without choosing Remember Key.</li>
+      </ul>
+      <p>Clearing extension records does not guarantee forensic erasure from the device, older backups or browser storage remnants.</p>
+      <p><strong>The 24-hour period is a session-cache reuse expiry, not a guaranteed deletion timer.</strong> Expired, malformed, future-dated, or over-budget entries are pruned when the worker initializes and when new entries are saved. Expired entries may remain within a running browser session until the next pruning or explicit clearing. The cache is cleared when that session ends and does not carry into a new session. Closing an X tab alone does not end the browser session. Uninstalling or removing extension data through the browser provides broader local removal; third-party records are separate.</p>
+      <p>History's separate 24-hour lifetime runs from the latest view. Expired entries are excluded from history views and removed on startup, history reads/writes and hourly <code>alarms</code> cleanup. Browser shutdown, scheduling delays or storage errors may postpone physical deletion; there is no exact-time erasure guarantee. History survives restart and can be pruned earlier to meet storage limits.</p>
+      <p>SuperX has no independent spending budget or post-count cap. All visible eligible posts can trigger paid work when automatic analysis is enabled. Review xAI billing before enabling it.</p>
+
+      <h3>6. Permissions</h3>
+      <ul>
+        <li><code>storage</code>: Local settings, recent browsing history and optionally encrypted API keys, plus restricted session keys and session result caches.</li>
+        <li><code>alarms</code>: Periodic removal of expired local history; no scheduled paid requests.</li>
+        <li><code>https://x.com/*</code> and <code>https://twitter.com/*</code>: Observe supported post elements, follow theme/language, and display the result column.</li>
+        <li><code>https://api.x.ai/*</code>: Call xAI directly from the background worker.</li>
+      </ul>
+      <p>The extension does not request the browser's <code>cookies</code> or <code>history</code> permission or access to all websites. Its recent history comes from visible supported X post elements, not the browser's global history database. Content-script site matching is broader than the supported analysis paths; runtime behavior excludes direct messages and standalone Grok/settings flows.</p>
+
+      <h3>7. Support, this website, and updates</h3>
+      <p>Public support: <a href="https://github.com/bwjoke/SuperX/issues" rel="noopener noreferrer">SuperX Issues</a>. Remove keys, passwords, account details, protected posts, and request payloads before sharing screenshots, logs, or reports. Public GitHub issues may be visible to anyone, and GitHub's terms and privacy policy also apply. Material you voluntarily submit is used to address your report. Send sensitive security reports through <a href="https://github.com/bwjoke/SuperX/security/advisories/new" rel="noopener noreferrer">private vulnerability reporting</a> when available; otherwise ask for a private channel without posting sensitive details.</p>
+      <p>This privacy page includes no remote scripts or tracking code. A static hosting provider may still keep access logs, such as IP addresses, access times, and requested paths, according to its configuration. Website visits are separate from analysis requests sent by the extension to xAI.</p>
+      <p>This policy and in-extension disclosures will be updated when handled fields, key storage, host permissions, or third-party requests change. Contact support above with questions. This policy does not promise deletion on behalf of xAI or guarantee correct AI output.</p>
+    </article>
+  </main>
+  <footer><p>SuperX · 独立浏览器扩展 / Independent browser extension · <a href="#zh">中文</a> · <a href="#en" lang="en">English</a></p></footer>
+</body>
+</html>

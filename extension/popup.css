@@ -1,0 +1,50 @@
+:root {
+  color-scheme: dark;
+  font-family: "TwitterChirp", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: #000;
+  color: #e7e9ea;
+  --background: #000;
+  --foreground: #e7e9ea;
+  --muted: #71767b;
+  --accent: #1d9bf0;
+  --line: #2f3336;
+  --hover: #181818;
+  --button-hover: #d7dbdc;
+  --button-line: #536471;
+  --error: #f4212e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; width: 320px; min-width: 0; max-width: 100%; background: var(--background); }
+main { min-width: 0; padding: 22px 20px 20px; }
+header { padding-bottom: 20px; }
+h1 { margin: 0; }
+.brand-heading { font-size: 0; line-height: 1; color: var(--foreground); }
+/* Same original SVG and exact canvas crop used on the Settings page.
+   Alpha ink bounds: 110,118 → 1484,439 within the 1600×560 viewBox. */
+.brand-logo { display: block; width: 200px; max-width: 100%; aspect-ratio: 1374 / 321; background: currentColor; -webkit-mask-image: url("assets/superx-logo.svg"); mask-image: url("assets/superx-logo.svg"); -webkit-mask-size: 116.448326055% 174.454828661%; mask-size: 116.448326055% 174.454828661%; -webkit-mask-position: 48.672566372% 49.372384937%; mask-position: 48.672566372% 49.372384937%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; mask-mode: alpha; }
+header p { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.state-card { padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.state-heading { display: flex; align-items: center; gap: 9px; color: var(--foreground); font-size: 14px; line-height: 1.45; }
+.state-heading strong { min-width: 0; font-weight: 700; }
+.indicator { flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.indicator[data-enabled="true"] { background: var(--accent); }
+dl { margin: 15px 0 0; }
+dl div { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 12px; align-items: start; font-size: 12px; line-height: 1.45; }
+dt { min-width: 0; color: var(--muted); }
+dd { min-width: 0; margin: 0; color: var(--foreground); text-align: end; }
+button { display: block; width: 100%; min-width: 0; min-height: 40px; padding: 9px 14px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 14px; line-height: 1.45; font-weight: 700; }
+.primary-button { margin-top: 20px; border: 1px solid var(--foreground); background: var(--foreground); color: var(--background); }
+.primary-button:hover:not(:disabled) { border-color: var(--button-hover); background: var(--button-hover); }
+.secondary-button { margin-top: 10px; border: 1px solid var(--button-line); background: transparent; color: var(--foreground); }
+.secondary-button:hover:not(:disabled) { background: var(--hover); }
+button:disabled { opacity: .5; cursor: wait; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#status { margin: 14px 0 0; color: var(--error); font-size: 13px; line-height: 1.5; }
+#status:empty { display: none; }
+.hint { margin: 18px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+p, strong, dt, dd, button { overflow-wrap: anywhere; }
+@media (prefers-color-scheme: light) {
+  :root { color-scheme: light; background: #fff; color: #0f1419; --background: #fff; --foreground: #0f1419; --muted: #536471; --accent: #0072b1; --line: #eff3f4; --hover: #f7f9f9; --button-hover: #272c30; --button-line: #89939b; --error: #d01827; }
+}
+/* Keep hidden onboarding actions out of layout, even with the button display rule. */
+[hidden] { display: none !important; }

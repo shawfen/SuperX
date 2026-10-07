@@ -1,0 +1,98 @@
+name: Prepare preview release draft
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Validate release source
+        run: node tools/validate.mjs
+      - name: Require tag to match package and extension version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          node -e 'if (!/^v[0-9]+\.[0-9]+\.[0-9]+$/.test(process.env.RELEASE_TAG)) throw new Error("Use a vMAJOR.MINOR.PATCH release tag")'
+          node tools/package-release.mjs --expected-version "${RELEASE_TAG#v}"
+      - name: Prepare installation and support notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh api "repos/$GH_REPO/releases/generate-notes" \
+            -f tag_name="$RELEASE_TAG" --jq '.body' > "$RUNNER_TEMP/superx-generated-notes.md"
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          import { join } from 'node:path';
+          const { GH_REPO: repo, RELEASE_TAG: tag, RUNNER_TEMP: directory } = process.env;
+          const version = tag.slice(1);
+          const project = `https://github.com/${repo}`;
+          const download = `${project}/releases/download/${tag}`;
+          const generated = await readFile(join(directory, 'superx-generated-notes.md'), 'utf8');
+          const notes = [
+            `SuperX ${version} is a preview candidate for early feedback.`,
+            '',
+            `**[Download the installable ZIP](${download}/SuperX.zip)** · [Source ZIP](${download}/SuperX-${version}-source.zip)`,
+            '',
+            '1. Extract the installation ZIP into a permanent folder.',
+            '2. Open Chrome or Edge Extensions, enable Developer mode, and load that folder as an unpacked extension.',
+            '3. Open SuperX settings, enter your own xAI API Key and save settings, then open X. API usage is billed by xAI. No password or separate data-confirmation step is required.',
+            '',
+            'Preview installations update manually: replace the files in the same folder, reload the extension, then refresh X. Installing a separate Chrome Web Store copy does not automatically migrate an unpacked copy\'s settings or Key.',
+            '',
+            `Installation files: [versioned ZIP](${download}/SuperX-${version}.zip), [SHA256 checksums](${download}/SuperX-${version}-SHA256SUMS.txt), [file inventory](${download}/SuperX-${version}-files.json). SuperX.zip contains the identical ZIP bytes.`,
+            `Source files: [SHA256 checksums](${download}/SuperX-${version}-source-SHA256SUMS.txt), [file inventory](${download}/SuperX-${version}-source-files.json).`,
+            '',
+            `**Support:** [Report a bug or suggest a feature](${project}/issues/new/choose) · [Installation guide](${project}/blob/${tag}/README.md) · [中文说明](${project}/blob/${tag}/README.zh-CN.md)`,
+            '',
+            `The Chrome Web Store is the stable distribution channel. After candidate acceptance, the same installation ZIP and SHA256 are submitted to the store; promotion changes release status and notes, never the tag or ZIP. See [release channels](${project}/blob/${tag}/docs/RELEASE_CHANNELS.md).`,
+            '',
+            '---',
+            '',
+            generated.trim(),
+            '',
+          ].join('\n');
+          await writeFile(join(directory, 'superx-release-notes.md'), notes);
+          NODE
+      - name: Create or update a draft for maintainer review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          version="${RELEASE_TAG#v}"
+          assets=("artifacts/SuperX-$version.zip" "artifacts/SuperX.zip" "artifacts/SuperX-$version-files.json" "artifacts/SuperX-$version-SHA256SUMS.txt" "artifacts/SuperX-$version-source.zip" "artifacts/SuperX-$version-source-files.json" "artifacts/SuperX-$version-source-SHA256SUMS.txt")
+          # Existing published releases are immutable for this workflow.
+          if gh release view "$RELEASE_TAG" --json isDraft --jq '.isDraft' > "$RUNNER_TEMP/superx-release-state" 2>/dev/null; then
+            if [ "$(cat "$RUNNER_TEMP/superx-release-state")" != "true" ]; then
+              echo "Refusing to change a published release."
+              exit 1
+            fi
+            gh release edit "$RELEASE_TAG" --draft --prerelease --latest=false \
+              --title "SuperX $RELEASE_TAG (Preview)" --notes-file "$RUNNER_TEMP/superx-release-notes.md"
+            gh release upload "$RELEASE_TAG" "${assets[@]}" --clobber
+          else
+            gh release create "$RELEASE_TAG" "${assets[@]}" \
+              --verify-tag --draft --prerelease --latest=false \
+              --title "SuperX $RELEASE_TAG (Preview)" --notes-file "$RUNNER_TEMP/superx-release-notes.md"
+          fi

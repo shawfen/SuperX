@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest an improvement to SuperX.
+title: '[Feature] '
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would this help you do?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Explain the user-facing outcome and any useful alternatives.
+    validations:
+      required: true

@@ -1,0 +1,45 @@
+name: Bug report
+description: Report a reproducible SuperX problem.
+title: '[Bug] '
+body:
+  - type: markdown
+    attributes:
+      value: 'Please remove API Keys, tokens, personal data and private post content from screenshots and logs. Use SECURITY.md for security vulnerabilities.'
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: SuperX version, Chrome/Edge version and operating system.
+    validations:
+      required: true
+  - type: dropdown
+    id: installation_source
+    attributes:
+      label: Installation source
+      description: This helps match the report to its release and update path.
+      options:
+        - Chrome Web Store
+        - GitHub Release — Preview ZIP
+        - GitHub Release — Stable ZIP
+        - Source checkout or CI artifact
+        - Other / unsure
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include a public post URL only if needed and safe to share.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Optional screenshot or sanitized diagnostic
+      description: Do not paste API Keys, authorization headers or complete request payloads.
