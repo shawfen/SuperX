@@ -39,7 +39,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(manifest['path'],str(self.native/'launch-host'))
         self.assertTrue((self.native/'launch-host').stat().st_mode & 0o100)
         self.assertIn('"$@"',(self.native/'launch-host').read_text())
-        self.assertEqual(json.loads((self.native/'config.json').read_text())['runtime'],str(runtime))
+        self.assertEqual(json.loads((self.native/'config.json').read_text())['runtime'],str(runtime.resolve()))
 
     def test_missing_cli_and_conflicting_install_do_not_write_config(self):
         with patch.object(installer,'HERE',self.native),patch.object(installer,'find_grok',return_value=None):
