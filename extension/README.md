@@ -34,7 +34,7 @@ CLI 请求仍发送到 Grok 云端，使用账号额度；本地运行不代表�
 
 ## 验证与反馈
 
-运行 `node --test tests/*.test.cjs` 和 `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py'`。这些测试使用模拟接口，不调用真实付费模型。
+在完整仓库源码的根目录运行 `npm test` 和 `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py'`。这些测试使用模拟接口，不调用真实付费模型。
 
 已在 Ego Lite（Chromium）实测 CLI、停留/手动触发及图片遮挡修复。未完成独立 Google Chrome、Edge、Windows 或 Linux 的整套验收。模型时延和账号可用性可能变化。
 
